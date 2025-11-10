@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-history"></i> Prediction History</h4>
+            </div>
+            <div class="card-body">
+                {% if predictions %}
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Prediction</th>
+                                    <th>Confidence</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for pred in predictions %}
+                                <tr>
+                                    <td>
+                                        <img src="{{ pred.image.url }}" width="50" height="50" class="rounded">
+                                    </td>
+                                    <td>
+                                        {% if pred.prediction == 'Real' %}
+                                            <span class="badge bg-success">{{ pred.prediction }}</span>
+                                        {% else %}
+                                            <span class="badge bg-danger">{{ pred.prediction }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ pred.confidence|floatformat:2 }}%</td>
+                                    <td>{{ pred.created_at|date:"M d, Y H:i" }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="text-center">
+                        <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                        <p>No predictions yet. <a href="{% url 'upload' %}">Upload an image</a> to get started!</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

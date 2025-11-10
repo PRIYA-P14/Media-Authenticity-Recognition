@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="col-md-8 col-lg-6">
+        <div class="text-center mb-4">
+            <i class="fas fa-cloud-upload-alt fa-4x text-primary mb-3"></i>
+            <h2 class="text-dark mb-2">Upload Image for Detection</h2>
+            <p class="text-muted">Upload an image to detect if it's real or fake using AI</p>
+        </div>
+        
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-body p-5">
+                <form method="post" enctype="multipart/form-data" class="text-center" id="uploadForm">
+                    {% csrf_token %}
+                    <div class="mb-4">
+                        <label class="form-label fw-bold text-dark">Select Image File</label>
+                        {{ form.image }}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg px-5 rounded-pill" id="analyzeBtn">
+                        <i class="fas fa-search me-2"></i> Analyze Image
+                    </button>
+                    <div id="loadingDiv" class="mt-4" style="display: none;">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2 text-primary fw-bold">Analyzing image... Please wait</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <div class="card border-0 bg-transparent">
+                <div class="card-body">
+                    <h6 class="text-dark mb-3">Supported Formats:</h6>
+                    <div class="row justify-content-center">
+                        <div class="col-auto">
+                            <span class="badge bg-success fs-6 me-2">
+                                <i class="fas fa-check me-1"></i> JPG/JPEG
+                            </span>
+                        </div>
+                        <div class="col-auto">
+                            <span class="badge bg-success fs-6">
+                                <i class="fas fa-check me-1"></i> PNG
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('uploadForm').addEventListener('submit', function() {
+    document.getElementById('analyzeBtn').style.display = 'none';
+    document.getElementById('loadingDiv').style.display = 'block';
+});
+</script>
+{% endblock %}

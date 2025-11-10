@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-chart-line"></i> Model Training Statistics</h4>
+            </div>
+            <div class="card-body text-center">
+                {% if stats_available %}
+                    <img src="/static/training_history.png" class="img-fluid" alt="Training History">
+                    <p class="mt-3 text-muted">Training and validation accuracy/loss over epochs</p>
+                {% else %}
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        Training statistics will be available after the model is trained.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

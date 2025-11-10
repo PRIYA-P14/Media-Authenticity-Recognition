@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto text-center">
+        <h1 class="display-4 mb-4">
+            <i class="fas fa-eye text-primary"></i>
+            Media Authenticity Recognition
+        </h1>
+        <p class="lead">Detect fake images using advanced AI technology</p>
+        
+        {% if user.is_authenticated %}
+            <div class="row mt-5">
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body text-center">
+                            <i class="fas fa-upload fa-3x text-success mb-3"></i>
+                            <h5 class="text-dark">Upload Image</h5>
+                            <p class="text-muted">Upload an image to check if it's real or fake</p>
+                            <a href="{% url 'upload' %}" class="btn btn-success">Upload Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body text-center">
+                            <i class="fas fa-history fa-3x text-info mb-3"></i>
+                            <h5 class="text-dark">View History</h5>
+                            <p class="text-muted">Check your previous predictions and results</p>
+                            <a href="{% url 'history' %}" class="btn btn-info">View History</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body text-center">
+                            <i class="fas fa-chart-line fa-3x text-warning mb-3"></i>
+                            <h5 class="text-dark">Training Stats</h5>
+                            <p class="text-muted">View model training accuracy and loss graphs</p>
+                            <a href="{% url 'training_stats' %}" class="btn btn-warning">View Stats</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="mt-4">
+                <a href="{% url 'signup' %}" class="btn btn-primary btn-lg me-3">Get Started</a>
+                <a href="{% url 'login' %}" class="btn btn-outline-primary btn-lg">Login</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
